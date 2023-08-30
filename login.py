@@ -8,7 +8,7 @@ def existing_user():
     cnx = mysql.connector.connect(
         host="127.0.0.1",
         user="root",
-        password="Yabolingo@12",
+        password="your_password",
         database="simple_softwaredb"
     )
 
