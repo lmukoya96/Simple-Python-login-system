@@ -1,3 +1,4 @@
 1.This is a simple python program that enables a user to create an account and also login.
-2.All the account info is stored in MySQL server data there MySQL will be needed.
-3.The main function is in the login.py file.
+2.All the account info is stored in MySQL server data,therefore MySQL will be needed.
+3.You will need to update the server connection credentials for your server in the login.py and the personal_info.py files.
+4.The main function is in the login.py file.
