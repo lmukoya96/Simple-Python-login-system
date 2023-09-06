@@ -6,9 +6,9 @@ from software import welcome_to_software
 def existing_user():
     # Establish a connection
     cnx = mysql.connector.connect(
-        host="127.0.0.1",
-        user="root",
-        password="Yabolingo@12",
+        host="your_connection",
+        user="your_username",
+        password="your_password",
         database="simple_softwaredb"
     )
 
