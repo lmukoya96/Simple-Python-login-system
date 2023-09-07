@@ -3,14 +3,10 @@ from personal_info import User
 from software import welcome_to_software
 
 class Login:
+    @staticmethod
     def existing_user():
         # Establish a connection
-        cnx = mysql.connector.connect(
-            host="your_connection",
-            user="your_username",
-            password="your_password",
-            database="simple_softwaredb"
-        )
+        cnx = User.Server_Connection()
 
         # Create a cursor
         cursor = cnx.cursor()
@@ -40,6 +36,7 @@ class Login:
         cursor.close()
         cnx.close()
 
+    @staticmethod
     def new_user():
         # Get personal information from the user
         info = User.get_personal_info()

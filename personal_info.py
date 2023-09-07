@@ -32,21 +32,24 @@ class User:
         }
         
         return personal_info
-
-
+    
+    # Connect to the MySQL server.
+    def Server_Connection():
+        cnx = mysql.connector.connect(
+            host="your_connection",
+            user="your_username",
+            password="your_password",
+            database="simple_softwaredb"
+        )
+        return cnx
+    
     def store_personal_info(personal_info):
         try:
-            # Connect to the MySQL server
-            cnx = mysql.connector.connect(
-                host="your_connection",
-                user="your_username",
-                password="your_password",
-                database="simple_softwaredb"
-            )
+            User.Server_Connection()
 
         except mysql.connector.Error as error:
             if error.errno == errorcode.ER_BAD_DB_ERROR:
-                # The database does not exist, so create it
+                # The database does not exist, so create it.
                 cnx = mysql.connector.connect(
                     host="your_connection",
                     user="your_username",
@@ -54,6 +57,7 @@ class User:
                 )
                 cursor = cnx.cursor()
 
+                # Create the database
                 cursor.execute("CREATE DATABASE simple_softwaredb")
                 cursor.execute("USE simple_softwaredb")
                 cursor.execute("CREATE TABLE personal_info (user_id INT PRIMARY KEY AUTO_INCREMENT, first_name TEXT(255), last_name TEXT(255), date_of_birth DATE, phone_number VARCHAR(15) UNIQUE, country TEXT(255), street TEXT(255), city TEXT(255), state TEXT(255), email VARCHAR (50) UNIQUE, username TEXT(255), password TEXT(255))")
@@ -69,13 +73,7 @@ class User:
                 cursor.close()
 
         try:
-            # Connect to the MySQL database
-            cnx = mysql.connector.connect(
-                host="your_connection",
-                user="your_username",
-                password="your_password",
-                database="simple_softwaredb"
-            )
+            User.Server_Connection()
 
             # Create a cursor object to interact with the database
             cursor = cnx.cursor()
