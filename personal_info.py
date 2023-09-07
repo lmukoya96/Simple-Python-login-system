@@ -54,10 +54,10 @@ class User:
                 )
                 cursor = cnx.cursor()
 
-                # Create the database
                 cursor.execute("CREATE DATABASE simple_softwaredb")
                 cursor.execute("USE simple_softwaredb")
-                cursor.execute("CREATE TABLE personal_info (first_name TEXT(255), last_name TEXT(255), date_of_birth DATE, phone_number VARCHAR(15), country TEXT(255), street TEXT(255), city TEXT(255), state TEXT(255), email VARCHAR (50), username TEXT(255), password TEXT(255))")          
+                cursor.execute("CREATE TABLE personal_info (user_id INT PRIMARY KEY AUTO_INCREMENT, first_name TEXT(255), last_name TEXT(255), date_of_birth DATE, phone_number VARCHAR(15) UNIQUE, country TEXT(255), street TEXT(255), city TEXT(255), state TEXT(255), email VARCHAR (50) UNIQUE, username TEXT(255), password TEXT(255))")
+                cursor.execute("ALTER TABLE personal_info AUTO_INCREMENT = 10001")       
                 cnx.database = "simple_softwaredb"
 
             else:
