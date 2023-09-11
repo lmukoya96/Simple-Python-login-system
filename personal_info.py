@@ -6,7 +6,7 @@ class User:
         # Prompt user for personal information
         first_name = input("Enter your First Name: ")
         last_name = input("Enter your Last Name: ")
-        date_of_birth = input("Enter your date of birth (DD-MM-YYYY): ")
+        date_of_birth = input("Enter your date of birth (YYYY-MM-DD): ")
         phone_number = input("Enter your Phone Number: ")
         country = input("Enter your Country: ")
         street = input("Enter your Street: ")
@@ -15,6 +15,7 @@ class User:
         email = input("Enter your Email: ")
         username = input("Enter your Username: ")
         password = input("Enter your Password: ")
+        logged_in = 0
         
         # Return personal information as a dictionary
         personal_info = {
@@ -28,7 +29,8 @@ class User:
             "State": state,
             "Email": email,
             "Username": username,
-            "Password": password
+            "Password": password,
+            "logged_in": logged_in
         }
         
         return personal_info
@@ -60,7 +62,7 @@ class User:
                 # Create the database
                 cursor.execute("CREATE DATABASE simple_softwaredb")
                 cursor.execute("USE simple_softwaredb")
-                cursor.execute("CREATE TABLE personal_info (user_id INT PRIMARY KEY AUTO_INCREMENT, first_name TEXT(255), last_name TEXT(255), date_of_birth DATE, phone_number VARCHAR(15) UNIQUE, country TEXT(255), street TEXT(255), city TEXT(255), state TEXT(255), email VARCHAR (50) UNIQUE, username TEXT(255), password TEXT(255))")
+                cursor.execute("CREATE TABLE personal_info (user_id INT PRIMARY KEY AUTO_INCREMENT, first_name TEXT(255), last_name TEXT(255), date_of_birth DATE, phone_number VARCHAR(15) UNIQUE, country TEXT(255), street TEXT(255), city TEXT(255), state TEXT(255), email VARCHAR (50) UNIQUE, username TEXT(255), password TEXT(255), logged_in BOOL)")
                 cursor.execute("ALTER TABLE personal_info AUTO_INCREMENT = 10001")       
                 cnx.database = "simple_softwaredb"
 
@@ -80,8 +82,8 @@ class User:
 
             # Define the SQL query
             query = """
-            INSERT INTO personal_info (first_name, last_name, date_of_birth, phone_number, country, street, city, state, email, username, password)
-            VALUES (%(First Name)s, %(Last Name)s, %(Date of Birth)s, %(Phone Number)s, %(Country)s, %(Street)s, %(City)s, %(State)s, %(Email)s, %(Username)s, %(Password)s)
+            INSERT INTO personal_info (first_name, last_name, date_of_birth, phone_number, country, street, city, state, email, username, password, logged_in)
+            VALUES (%(First Name)s, %(Last Name)s, %(Date of Birth)s, %(Phone Number)s, %(Country)s, %(Street)s, %(City)s, %(State)s, %(Email)s, %(Username)s, %(Password)s, %(logged_in)s)
             """
 
             # Execute the query

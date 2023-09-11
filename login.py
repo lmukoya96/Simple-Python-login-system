@@ -15,7 +15,7 @@ class Login:
         username = input("Username: ")
         password = input("Password: ")
 
-        # Execute SQL query
+        # Execute SQL query to compare given username and password.
         query = "SELECT * FROM personal_info WHERE username = %s AND password = %s"
         cursor.execute(query, (username, password))
 
@@ -24,6 +24,13 @@ class Login:
 
         if result:
             print("Welcome, " + username)
+
+            # Execute SQL query to set the user as logged in.
+            update_query = "UPDATE personal_info SET logged_in = 1 WHERE username = %s"
+            cursor.execute(update_query, (username,))
+            cnx.commit()
+
+            print("You are now logged in.")
 
             #User is able to access software
             welcome_to_software()
